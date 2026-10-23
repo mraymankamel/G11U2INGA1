@@ -238,13 +238,18 @@
             .top-bar-controls { top: 12px; padding: 0 12px; }
             header img { width: 90px; height: 90px; margin-top: 15px;}
             header h1 { font-size: 24px; }
+            
             .timer-box { font-size: 15px; height: 40px; }
             .icon-btn { width: 40px; height: 40px; }
+            
             .cheer-bubble { padding: 14px 18px; }
+            
             .avatar-grid { gap: 10px; padding: 15px 5px 25px 5px; }
             .avatar-option { font-size: 26px; padding: 10px 14px; }
+            
             .action-btns { flex-direction: column; gap: 14px; margin-top: 35px;}
             .btn { width: 100%; font-size: 16px; padding: 18px; }
+            
             .result-actions { grid-template-columns: 1fr; }
             .btn-full { grid-column: span 1; }
             .score-circle { width: 180px; height: 180px; font-size: 45px;}
@@ -273,6 +278,9 @@
     </div>
 </div>
 
+<!-- ========================================================
+     🖨️ PRINT MASTER ENGINE V.MAX CONTAINER
+     ======================================================== -->
 <div id="print-container">
     <div class="print-watermark">
         <img src="https://lh3.googleusercontent.com/d/1BqwA44F0BAwWMSwBnBeDIkfkNgBEtif-" alt="Watermark">
@@ -360,8 +368,8 @@
     <div class="content-body no-print" id="start-body">
         <div id="start-screen">
             <div class="welcome-card">
-                <h3>🌟 خطوتك نحو الاحتراف تبدأ هنا!</h3>
-                <p>تحدي شامل واستثنائي لقواعد Gerunds & Infinitives (57 سؤالاً). اقرأ الأسئلة بعناية واستعد لإثبات جدارتك.<br><br>هل تقبل التحدي؟</p>
+                <h3>🌟 خطوتك نحو القمة تبدأ هنا!</h3>
+                <p>تحدي استثنائي مصمم لقياس تركيزك الحقيقي وقوة ملاحظتك تحت الضغط. اقرأ التفاصيل بدقة واستعد لإثبات جدارتك.<br><br>هل تقبل التحدي وتستطيع الوصول للقمة؟</p>
             </div>
             
             <h4 style="color: var(--text-main); font-weight: 800; margin-bottom: 15px; text-align: center;">اختار مستوى التحدي الزمني:</h4>
@@ -412,6 +420,7 @@
 
     <!-- Result Screen -->
     <div id="result-screen" style="display: none;">
+        
         <div class="score-card no-print">
             <div class="score-circle" id="score-percentage">0 / 0</div>
             <div id="score-percent-text">Accuracy: 0%</div>
@@ -446,6 +455,7 @@ const EXAM_SCORE_TEXT = "/ 57";
 
 function tryVibrate(pattern) { if (navigator.vibrate) try { navigator.vibrate(pattern); } catch(e){} }
 
+/* 🔥 REFRESH PROTECTION 🔥 */
 window.addEventListener('beforeunload', function (e) {
     if (document.getElementById('quiz-screen') && document.getElementById('quiz-screen').style.display === 'block' && !isSubmitting) {
         e.preventDefault();
@@ -453,6 +463,7 @@ window.addEventListener('beforeunload', function (e) {
     }
 });
 
+/* 🖨️ Print Master Engine Direct Modes */
 function preparePrintData() {
     const titleOut = document.getElementById("print-title-out");
     const scoreOut = document.getElementById("print-score-out");
@@ -479,6 +490,7 @@ function printSmartNotes() {
     document.body.classList.remove('print-notes-mode');
 }
 
+/* Audio & Init */
 let audioCtx = null;
 function initAudio() { try { if (!audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; if(AudioContext) audioCtx = new AudioContext(); } if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); } catch(e) {} }
 function playTone(freq, type, duration) { try { initAudio(); if (!audioCtx) return; let osc = audioCtx.createOscillator(), gain = audioCtx.createGain(); osc.type = type; osc.frequency.value = freq; gain.gain.setValueAtTime(0.05, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + duration); } catch(e) {} }
@@ -518,7 +530,7 @@ function initScratchCard() {
         canvas.onmousedown = () => isDrawing = true; canvas.ontouchstart = () => isDrawing = true;
         canvas.onmouseup = () => isDrawing = false; canvas.ontouchend = () => isDrawing = false;
         canvas.onmousemove = scratch; canvas.ontouchmove = scratch;
-    } catch(e) {}
+    } catch(e) { console.log("Scratch card init skipped"); }
 }
 
 const cheers = [
@@ -531,7 +543,12 @@ const cheers = [
     {en: "You're closer to perfection!", ar: "خطوة كمان والتقفيل يبقى بتاعك!"},
     {en: "Take a deep breath and conquer!", ar: "خد نفس عميق وفرتك اللي بعده."},
     {en: "Pure genius!", ar: "عبقرية ماشية على الأرض، استمر!"},
-    {en: "Every detail matters!", ar: "ركز في التفاصيل، هي دي اللي بتفرق!"}
+    {en: "Every detail matters!", ar: "ركز في التفاصيل، هي دي اللي بتفرق!"},
+    {en: "You're on fire today!", ar: "إنت مولعها النهاردة، بطل!"},
+    {en: "Stay sharp!", ar: "أوعى تسرح، عينك في وسط راسك!"},
+    {en: "Legendary progress!", ar: "أداء أساطير، مفيش كلام!"},
+    {en: "Nothing can break your focus!", ar: "ولا ألف سؤال يقدروا يوقعوك!"},
+    {en: "The top rank is calling!", ar: "القمة بتناديك، متتنازلش عنها نهائياً!"}
 ];
 let lastCheerIndex = -1; 
 function triggerTeacherCheer() {
@@ -563,9 +580,8 @@ function changeFontSize(change) {
     if(newSize >= 16 && newSize <= 30) root.style.setProperty('--q-font-size', newSize + 'px');
 }
 
-/* 🔥 FULL 57 QUESTIONS ARRAY (GERUNDS & INFINITIVES) 🔥 */
+/* 🔥 CLEANED DATA ARRAY - 57 Questions 🔥 */
 const rawData = [
-    // --- Group 1 (1 to 30) ---
     { q: "1. They agreed ........ the contract with new terms.", options: ["signing", "to signing", "sign", "to sign"], answer: 3, rule: "Agree + to-infinitive", zatona: "الفعل agree يُتْبَع بـ to + المصدر (to sign)." },
     { q: "2. He admitted ........ the money from the safe.", options: ["with stealing", "stealing", "steal", "to steal"], answer: 1, rule: "Admit + gerund", zatona: "الفعل admit يُتْبَع بـ gerund (-ing) بمعنى يعترف بـ (stealing)." },
     { q: "3. He failed ........ the final exam despite studying all night.", options: ["to passing", "pass", "to pass", "passing"], answer: 2, rule: "Fail + to-infinitive", zatona: "الفعل fail يُتْبَع بـ to + المصدر (to pass)." },
@@ -596,8 +612,6 @@ const rawData = [
     { q: "28. Only one sentence in each group is grammatically correct:", options: ["My parents encouraged me to apply for the scholarship.", "My parents encouraged me applying for the scholarship.", "My parents encouraged me apply for the scholarship.", "My parents encouraged to apply for the scholarship."], answer: 0, rule: "Encourage + object + to-inf", zatona: "الفعل encourage + مفعول + to + المصدر (me to apply)." },
     { q: "29. Only one sentence in each group is grammatically correct:", options: ["We decided postponing the meeting until next Monday.", "We decided postpone the meeting until next Monday.", "We decided to postponing the meeting until next Monday.", "We decided to postpone the meeting until next Monday."], answer: 3, rule: "Decide + to-infinitive", zatona: "الفعل decide يُتْبَع بـ to + المصدر (to postpone)." },
     { q: "30. Only one sentence in each group is grammatically correct:", options: ["My sister avoids eat fast food because she wants to stay healthy.", "My sister avoiding eating fast food because she wants to stay healthy.", "My sister avoids eating fast food because she wants to stay healthy.", "My sister avoids to eat fast food because she wants to stay healthy."], answer: 2, rule: "Avoid + gerund", zatona: "الفعل avoids يُتْبَع بـ gerund (-ing) (avoids eating)." },
-    
-    // --- Group 2 (31 to 57) ---
     { q: "31. On his way home, he stopped ........ some bread from the bakery.", options: ["to be bought", "buy", "buying", "to buy"], answer: 3, rule: "Stop to do (purpose)", zatona: "توقف (لكي) يشتري، أي توقف لغرض، نستخدم to + المصدر (to buy)." },
     { q: "32. Honest citizens object to ........ unfairly by anyone.", options: ["treating", "being treated", "be treated", "treat"], answer: 1, rule: "Object to + passive gerund", zatona: "الاعتراض على (أن يُعاملوا)، مبني للمجهول بعد object to نستخدم (being treated)." },
     { q: "33. We regret ........ you that the train to Aswan has been delayed.", options: ["informing", "inform", "to inform", "informed"], answer: 2, rule: "Regret to do (bad news)", zatona: "الأسف على إبلاغ خبر سيء (يحدث الآن) يأخذ to + المصدر (to inform)." },
@@ -676,7 +690,10 @@ function shuffleArray(array) {
 }
 
 function initQuizData() {
-    if (!rawData || rawData.length === 0) return;
+    if (!rawData || rawData.length === 0) {
+        console.error("الأسئلة مفقودة من المصفوفة!");
+        return;
+    }
     let tempArray = JSON.parse(JSON.stringify(rawData));
     shuffleArray(tempArray); 
     quizData = tempArray.map((item, index) => {
@@ -761,7 +778,10 @@ function startQuiz() {
 
         startTimer(); 
         loadQuestion();
-    } catch (error) {}
+    } catch (error) {
+        console.error("Start Error: ", error);
+        alert("حدث خطأ، يرجى تحديث الصفحة والمحاولة مرة أخرى.");
+    }
 }
 
 function loadQuestion() {
@@ -899,6 +919,10 @@ function startTimer() {
             if(timerText) timerText.innerText = `${m < 100 ? (m < 10 ? '0'+m : m) : m}:${s < 10 ? '0'+s : s}`;
             if (totalSeconds <= 300) { 
                 if(timerBox) timerBox.classList.add("danger"); 
+                if(totalSeconds % 2 === 0 && timerBox) { 
+                    timerBox.classList.add("shake-active"); 
+                    setTimeout(()=> timerBox.classList.remove("shake-active"), 400); 
+                } 
             } else { 
                 if(timerBox) timerBox.classList.remove("danger"); 
             }
@@ -954,8 +978,8 @@ function calculateScore() {
             const correctOpt = item.options[item.answer];
 
             if (!isCorrect) {
-                let emailExplanation = (item.exp || "").replace(/class='exp-en'/g, "style='direction: ltr; text-align: left; color: #A1A1AA; font-size: 14px; margin-bottom: 8px;'").replace(/class='exp-separator'/g, "style='width: 100%; height: 1px; border-bottom: 1px dashed rgba(255,255,255,0.1); margin: 8px 0;'").replace(/class='exp-ar'/g, "style='direction: rtl; text-align: right; color: #FFF; font-family: Tahoma, Arial, sans-serif; font-size: 14px; font-weight: bold; margin-top: 8px;'");
-                wrongAnswersHTML += `<div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid rgba(255,255,255,0.05);"><div style="direction: ltr; text-align: left; font-weight: bold; color: #8B5CF6; margin-bottom: 8px; font-size: 16px;">Q: ${item.originalQ}</div><div style="direction: ltr; text-align: left; color: #F43F5E; font-size: 15px; margin-bottom: 4px;">❌ <b>Student's Answer:</b> ${emailUserOptText}</div><div style="direction: ltr; text-align: left; color: #10B981; font-size: 15px; margin-bottom: 10px;">✅ <b>Correct Answer:</b> ${correctOpt}</div><div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 6px; border-left: 4px solid #8B5CF6;">${emailExplanation}</div><div style="margin-top: 8px; color: #A1A1AA; font-size: 13px; direction: rtl;">📌 القاعدة المفقودة: ${item.rule}</div></div>`;
+                let emailExplanation = (item.exp || "").replace(/class='exp-en'/g, "style='direction: ltr; text-align: left; color: #A1A1AA; font-size: 14px; margin-bottom: 8px;'").replace(/class='exp-separator'/g, "style='width: 100%; height: 1px; border-bottom: 1px dashed rgba(139, 92, 246, 0.25); margin: 8px 0;'").replace(/class='exp-ar'/g, "style='direction: rtl; text-align: right; color: #FFF; font-family: Tahoma, Arial, sans-serif; font-size: 14px; font-weight: bold; margin-top: 8px;'");
+                wrongAnswersHTML += `<div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid rgba(139, 92, 246, 0.1);"><div style="direction: ltr; text-align: left; font-weight: bold; color: #8B5CF6; margin-bottom: 8px; font-size: 16px;">Q: ${item.originalQ}</div><div style="direction: ltr; text-align: left; color: #F43F5E; font-size: 15px; margin-bottom: 4px;">❌ <b>Student's Answer:</b> ${emailUserOptText}</div><div style="direction: ltr; text-align: left; color: #10B981; font-size: 15px; margin-bottom: 10px;">✅ <b>Correct Answer:</b> ${correctOpt}</div><div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 6px; border-left: 4px solid #8B5CF6;">${emailExplanation}</div><div style="margin-top: 8px; color: #A1A1AA; font-size: 13px; direction: rtl;">📌 القاعدة المفقودة: ${item.rule}</div></div>`;
             }
 
             let printOptionsHTML = '<div class="print-options-grid">';
@@ -1052,10 +1076,11 @@ function calculateScore() {
                 cheatWarnings: cheatWarningsCount, 
                 weakestRule: weakestRule 
             });
-            fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: payload }).catch(err => {});
+            fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: payload }).catch(err => console.log("Script sync error:", err));
         } catch(e){}
 
     } catch(e) { 
+        console.error("Score calculation error: ", e);
         document.getElementById("quiz-screen").style.display = "none";
         document.getElementById("result-screen").style.display = "block";
         document.getElementById("score-percentage").innerText = "تم التسليم";
