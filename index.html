@@ -40,29 +40,53 @@
         body.theme-5 { --accent: #F59E0B; --accent-glow: rgba(245, 158, 11, 0.4); } /* Amber */
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { -webkit-user-select: none; user-select: none; font-family: 'Cairo', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; padding: 20px 10px; overflow-x: hidden; }
-        input { -webkit-user-select: auto !important; user-select: auto !important; pointer-events: auto !important;}
-        .review-item *, .explanation-box *, .print-options-grid * { -webkit-user-select: text; user-select: text; }
+        
+        /* 🛡️ Strict Text Selection Rule */
+        body, .main-container, .review-item, .explanation-box, .print-options-grid, .glass-panel, .accent-text, .btn, .timer-box, .badge-award { 
+            -webkit-user-select: none !important; 
+            -moz-user-select: none !important; 
+            -ms-user-select: none !important; 
+            user-select: none !important; 
+            transition: 0.5s ease;
+        }
+        input#studentName { 
+            -webkit-user-select: auto !important; 
+            -moz-user-select: auto !important; 
+            -ms-user-select: auto !important; 
+            user-select: auto !important; 
+            pointer-events: auto !important;
+        }
 
-        body, .glass-panel, .accent-text, .btn, .timer-box, .badge-award, .bg-orb, .vip-phone, header img { transition: 0.5s ease; }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; padding: 20px 10px; overflow-x: hidden; }
 
         .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 40px 40px; }
         .bg-orb { position: fixed; top: -10%; left: 50%; transform: translateX(-50%); width: 70vw; height: 70vw; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); z-index: 0; filter: blur(140px); pointer-events: none; }
 
         .main-container { width: 100%; max-width: 850px; margin: 0 auto; background: var(--glass-bg); backdrop-filter: blur(25px); border-radius: 24px; border: 1px solid var(--glass-border); box-shadow: 0 0 50px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.05); display: flex; flex-direction: column; position: relative; z-index: 10; }
 
-        /* Header Setup */
+        /* Header Hierarchy */
         header { padding: 75px 20px 30px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; }
         
         .top-bar-controls { position: absolute; top: 20px; left: 0; width: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; z-index: 20; direction: ltr !important; }
         .left-controls { display: flex; align-items: center; gap: 8px; }
         .right-controls { display: flex; align-items: center; gap: 8px; }
         
-        header img { width: 115px; height: 115px; object-fit: contain; background-color: #0A0A0A !important; padding: 6px; border-radius: 50%; border: 3px solid var(--accent); box-shadow: 0 0 30px var(--accent-glow); cursor: pointer; flex-shrink: 0; aspect-ratio: 1/1; }
+        /* 🦅 اللوجو بالمعايير الهندسية الدقيقة */
+        header img { 
+            width: 115px; height: 115px; object-fit: contain; 
+            background-color: #FFFFFF !important; padding: 6px; 
+            border-radius: 50%; border: 3px solid var(--accent); 
+            box-shadow: 0 0 25px var(--accent-glow); 
+            cursor: pointer; flex-shrink: 0; aspect-ratio: 1/1; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-user-select: none !important; user-select: none !important;
+        }
+        header img:hover { transform: scale(1.08) rotate(5deg); }
+
         header h1 { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 900; margin: 10px 0 0; direction: ltr; text-shadow: 0 2px 10px rgba(0,0,0,0.8); color: #FFF;}
         header .job-title { font-size: 15px; font-weight: 800; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; direction: ltr;}
         header .slogan { font-family: 'Outfit', sans-serif; font-size: 16px; font-style: italic; color: var(--accent); margin: 5px 0 10px 0; direction: ltr; unicode-bidi: isolate; text-shadow: 0 0 15px var(--accent-glow);}
-        .vip-phone { background: linear-gradient(135deg, var(--accent), #18181B); color: #FFF; font-family: 'Outfit', sans-serif; padding: 8px 28px; border-radius: 30px; font-weight: 900; font-size: 16px; letter-spacing: 2px; box-shadow: 0 0 20px var(--accent-glow); direction: ltr; border: 1px solid rgba(255,255,255,0.1); }
+        .vip-phone { background: linear-gradient(135deg, var(--accent), #18181B); color: #FFF; font-family: 'Outfit', sans-serif; padding: 8px 28px; border-radius: 30px; font-weight: 900; font-size: 16px; letter-spacing: 2px; box-shadow: 0 0 20px var(--accent-glow); direction: ltr; border: 1px solid rgba(255,255,255,0.1); margin-top: 5px;}
 
         .timer-box { background: var(--input-bg); color: var(--accent); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0 16px; height: 44px; display: flex; align-items: center; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.8); letter-spacing: 1px;}
         .time-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; margin-right: 8px; animation: blink 1s infinite; box-shadow: 0 0 10px var(--accent);}
@@ -77,7 +101,7 @@
         .cheer-wrapper { position: fixed; top: -120px; right: 20px; z-index: 99999; pointer-events: none; transition: top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .cheer-wrapper.show { top: 20px; }
         .cheer-bubble { background: var(--input-bg); backdrop-filter: blur(20px); border-radius: 16px; padding: 18px 24px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 15px; border: 1px solid rgba(255,255,255,0.1); border-right: 5px solid var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.9); direction: rtl; }
-        .cheer-bubble img { grid-column: 2; grid-row: 1 / span 3; width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent); background: #0A0A0A !important; padding: 4px; object-fit: contain; aspect-ratio: 1/1; }
+        .cheer-bubble img { grid-column: 2; grid-row: 1 / span 3; width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent); background: #FFFFFF !important; padding: 4px; object-fit: contain; aspect-ratio: 1/1; }
         .cheer-en { font-family:'Outfit', sans-serif; font-size:15px; font-weight:900; direction:ltr; text-align:left; color: #FFF;}
         .cheer-separator { grid-column: 1; width: 100%; height: 1px; background: rgba(255,255,255,0.1); border-bottom: 1px dashed rgba(255,255,255,0.05); margin: 6px 0;}
         .cheer-ar { font-family:'Cairo', sans-serif; font-size:14px; font-weight:800; color:var(--accent); direction:rtl; text-align:right;}
@@ -115,15 +139,15 @@
 
         .station-card { background: var(--card-bg); padding: 40px 30px; border-radius: 20px; margin-bottom: 35px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
         .question-text { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; direction: ltr; width: 100%; }
-        /* ENCAPSULATION FIX */
-        .question-text-wrapper { flex: 1; font-family: 'Outfit'; font-size: var(--q-font-size); font-weight: 800; line-height: 1.7; transition: 0.3s; width: 100%; display: block; text-align: left; color: #FFF;}
+        /* 🛡️ BULLETPROOF ENCAPSULATION */
+        .question-text-wrapper { flex: 1; font-family: 'Outfit'; font-size: var(--q-font-size); font-weight: 800; line-height: 1.7; transition: 0.3s; width: 100%; display: block; text-align: left; direction: ltr; color: #FFF;}
         
         .options-list { display: flex; flex-direction: column; gap: 18px; direction: ltr; }
         .option-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-left: 5px solid #3F3F46; border-radius: 14px; padding: 20px 24px; cursor: pointer; display: flex; align-items: center; gap: 20px; transition: 0.2s; }
         .option-item.selected { background: rgba(255,255,255,0.08); border-color: var(--accent); border-left: 6px solid var(--accent); box-shadow: 0 0 25px var(--accent-glow); }
         .opt-letter { background: var(--input-bg); color: var(--accent); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Outfit'; font-weight: 900; font-size: 18px; border: 1px solid rgba(255,255,255,0.1); flex-shrink:0;}
         .option-item.selected .opt-letter { background: var(--accent); color: #0A0A0A; border-color: var(--accent); text-shadow: none;}
-        .opt-text { font-family: 'Outfit'; font-weight: 600; font-size: 19px; color: var(--text-muted); }
+        .opt-text { font-family: 'Outfit'; font-weight: 600; font-size: 19px; color: var(--text-muted); direction: ltr; text-align: left;}
         .option-item.selected .opt-text { color: #FFF; }
 
         .action-btns { display: flex; flex-direction: row-reverse; justify-content: space-between; gap: 20px; direction: ltr;}
@@ -231,6 +255,7 @@
             .omr-bubble { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #000; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; }
         }
 
+        /* 📱 MOBILE THUMB-FRIENDLY ADJUSTMENTS */
         @media (max-width: 768px) {
             body { padding: 12px 6px; }
             .main-container { border-radius: 20px;}
@@ -238,18 +263,13 @@
             .top-bar-controls { top: 12px; padding: 0 12px; }
             header img { width: 90px; height: 90px; margin-top: 15px;}
             header h1 { font-size: 24px; }
-            
             .timer-box { font-size: 15px; height: 40px; }
             .icon-btn { width: 40px; height: 40px; }
-            
             .cheer-bubble { padding: 14px 18px; }
-            
             .avatar-grid { gap: 10px; padding: 15px 5px 25px 5px; }
             .avatar-option { font-size: 26px; padding: 10px 14px; }
-            
             .action-btns { flex-direction: column; gap: 14px; margin-top: 35px;}
             .btn { width: 100%; font-size: 16px; padding: 18px; }
-            
             .result-actions { grid-template-columns: 1fr; }
             .btn-full { grid-column: span 1; }
             .score-circle { width: 180px; height: 180px; font-size: 45px;}
@@ -300,10 +320,10 @@
             <tr>
                 <td>
                     <div class="exam-title-box">
-                        <h2 id="print-title-out">ELITE CHALLENGE - CODE: GER-INF-57</h2>
+                        <h2 id="print-title-out">ELITE CHALLENGE - CODE: GER-INF-38</h2>
                         <div class="student-info-row">
                             <div class="info-field name-field"><span class="info-label">Student Name:</span><div class="info-line" id="print-doc-student"></div></div>
-                            <div class="info-field score-field"><span class="info-label">Score:</span><div class="info-line" id="print-score-out">/ 57</div></div>
+                            <div class="info-field score-field"><span class="info-label">Score:</span><div class="info-line" id="print-score-out">/ 38</div></div>
                         </div>
                     </div>
                     
@@ -358,6 +378,7 @@
                 <img src="https://lh3.googleusercontent.com/d/1BqwA44F0BAwWMSwBnBeDIkfkNgBEtif-" alt="Mr. Ayman Kamel">
             </div>
         </div>
+        <!-- 🦅 اللوجو بالمعايير الهندسية (Hover Animation + Easter Egg) -->
         <img src="https://lh3.googleusercontent.com/d/1BqwA44F0BAwWMSwBnBeDIkfkNgBEtif-" alt="Mr. Ayman Kamel Logo" onclick="triggerEasterEgg()">
         <h1>Mr. Ayman Kamel</h1>
         <p class="job-title">English Language Educator</p>
@@ -397,7 +418,7 @@
             <div class="hud-progress-wrapper">
                 <div class="hud-stats">
                     <div class="hud-student"><div class="avatar-ring" id="hud-avatar">💎</div> <span id="hud-name">--</span></div>
-                    <div class="hud-counter" id="progress-count">Q: 1 / 57</div>
+                    <div class="hud-counter" id="progress-count">Q: 1 / 38</div>
                 </div>
                 <div class="hud-bar-container">
                     <div class="hud-bar-fill" id="energy-bar"><div class="hud-avatar-runner" id="hud-moving-avatar">💎</div></div>
@@ -442,7 +463,7 @@
             <button type="button" class="btn btn-outline btn-full" style="color:var(--accent); border-color:var(--accent);" onclick="location.reload()">🔄 إعادة المحاولة</button>
         </div>
 
-        <h3 class="no-print" style="text-align: right; color: var(--text-main); margin-top: 20px; border-bottom: 2px dashed rgba(139, 92, 246, 0.25); padding-bottom: 12px; font-weight: 900;">📂 المراجعة اللحظية (Smart Revision):</h3>
+        <h3 class="no-print" style="text-align: right; color: var(--text-main); margin-top: 20px; border-bottom: 2px dashed rgba(225, 29, 72, 0.25); padding-bottom: 12px; font-weight: 900;">📂 المراجعة اللحظية (Smart Revision):</h3>
         
         <div id="review-list" class="no-print"></div>
     </div>
@@ -450,8 +471,8 @@
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxps3pkSIfSFL8rwhCNMlNCEYkeL2ooxYo_6WgWRXHHL0hcY0owu-x0qRtZei0migOyxg/exec";
-const EXAM_TITLE = "ELITE CHALLENGE - CODE: GER-INF-57";
-const EXAM_SCORE_TEXT = "/ 57";
+const EXAM_TITLE = "ELITE CHALLENGE - CODE: GER-INF-38";
+const EXAM_SCORE_TEXT = "/ 38";
 
 function tryVibrate(pattern) { if (navigator.vibrate) try { navigator.vibrate(pattern); } catch(e){} }
 
@@ -513,7 +534,7 @@ function initScratchCard() {
         if(!container || !canvas) return;
         const ctx = canvas.getContext("2d");
         canvas.width = container.offsetWidth; canvas.height = container.offsetHeight;
-        let currentAccent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#8B5CF6';
+        let currentAccent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#E11D48';
         ctx.fillStyle = '#0A0A0A'; ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.font = "bold 18px 'Cairo', sans-serif"; ctx.fillStyle = currentAccent;
         ctx.textAlign = "center"; ctx.textBaseline = "middle";
@@ -530,7 +551,7 @@ function initScratchCard() {
         canvas.onmousedown = () => isDrawing = true; canvas.ontouchstart = () => isDrawing = true;
         canvas.onmouseup = () => isDrawing = false; canvas.ontouchend = () => isDrawing = false;
         canvas.onmousemove = scratch; canvas.ontouchmove = scratch;
-    } catch(e) { console.log("Scratch card init skipped"); }
+    } catch(e) {}
 }
 
 const cheers = [
@@ -563,13 +584,20 @@ function triggerTeacherCheer() {
     wrapper.classList.add("show"); setTimeout(() => { wrapper.classList.remove("show"); }, 3500);
 }
 
-let easterEggCount = 0;
-function triggerEasterEgg() { 
-    easterEggCount++;
-    if(easterEggCount >= 5) {
-        easterEggCount = 0;
-        try { soundBossWin(); } catch(e){}
-        alert("💎 Amethyst Horizon Print Master V.MAX Active! 💎"); 
+let logoClicks = 0, logoClickTimer;
+function triggerEasterEgg() {
+    logoClicks++; clearTimeout(logoClickTimer);
+    logoClickTimer = setTimeout(() => { logoClicks = 0; }, 1500);
+    if(logoClicks >= 5) {
+        soundBossWin();
+        try {
+            let confColor = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#E11D48';
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 300, spread: 150, origin: { y: 0.5 }, colors: ['#0A0A0A', confColor, '#FAFAFA'], zIndex: 999999 });
+            }
+        } catch(e){}
+        alert("💎 Obsidian Pulse Theme Active (Masterpiece)! 💎"); 
+        logoClicks = 0; 
     }
 }
 
@@ -580,65 +608,46 @@ function changeFontSize(change) {
     if(newSize >= 16 && newSize <= 30) root.style.setProperty('--q-font-size', newSize + 'px');
 }
 
-/* 🔥 CLEANED DATA ARRAY - 57 Questions 🔥 */
+/* 🔥 CLEANED DATA ARRAY - 38 Questions (Clean, Accurate, NO HTML TAGS in string) 🔥 */
 const rawData = [
-    { q: "1. They agreed ........ the contract with new terms.", options: ["signing", "to signing", "sign", "to sign"], answer: 3, rule: "Agree + to-infinitive", zatona: "الفعل agree يُتْبَع بـ to + المصدر (to sign)." },
-    { q: "2. He admitted ........ the money from the safe.", options: ["with stealing", "stealing", "steal", "to steal"], answer: 1, rule: "Admit + gerund", zatona: "الفعل admit يُتْبَع بـ gerund (-ing) بمعنى يعترف بـ (stealing)." },
-    { q: "3. He failed ........ the final exam despite studying all night.", options: ["to passing", "pass", "to pass", "passing"], answer: 2, rule: "Fail + to-infinitive", zatona: "الفعل fail يُتْبَع بـ to + المصدر (to pass)." },
-    { q: "4. She aims ........ a top doctor within the next five years.", options: ["to become", "become", "becoming", "will become"], answer: 0, rule: "Aim + to-infinitive", zatona: "الفعل aim يُتْبَع بـ to + المصدر (to become)." },
-    { q: "5. You should avoid ........ driving in the rush hour.", options: ["gone", "to go", "go", "going"], answer: 3, rule: "Avoid + gerund", zatona: "الفعل avoid يُتْبَع بـ gerund (-ing) بمعنى يتجنب (going)." },
-    { q: "6. The suspect pretended ........ asleep when the police arrived.", options: ["being", "to be", "be", "been"], answer: 1, rule: "Pretend + to-infinitive", zatona: "الفعل pretend يُتْبَع بـ to + المصدر (to be)." },
-    { q: "7. We decided to postpone ........ our holiday until next month.", options: ["to take", "took", "taking", "take"], answer: 2, rule: "Postpone + gerund", zatona: "الفعل postpone يُتْبَع بـ gerund (-ing) بمعنى يؤجل (taking)." },
-    { q: "8. He attempted ........ the broken machine, but couldn't fix it.", options: ["to repair", "repairing", "repair", "to be repaired"], answer: 0, rule: "Attempt + to-infinitive", zatona: "الفعل attempt يُتْبَع بـ to + المصدر (to repair)." },
-    { q: "9. The dynamic project proved ........ more complicated than we thought.", options: ["being", "to be", "be", "to being"], answer: 1, rule: "Prove + to-infinitive", zatona: "الفعل prove يُتْبَع بـ to + المصدر (to be)." },
-    { q: "10. I really appreciate ........ your feedback on this project.", options: ["to receive", "receive", "received", "receiving"], answer: 3, rule: "Appreciate + gerund", zatona: "الفعل appreciate يُتْبَع بـ gerund (-ing) (receiving)." },
-    { q: "11. She offered ........ me a ride home because it was raining.", options: ["giving", "to give", "give", "gave"], answer: 1, rule: "Offer + to-infinitive", zatona: "الفعل offer يُتْبَع بـ to + المصدر (to give)." },
-    { q: "12. The security guards allowed us ........ the building after hours.", options: ["entering", "enter", "to enter", "entered"], answer: 2, rule: "Allow + object + to-infinitive", zatona: "الفعل allow إذا تبعه مفعول (us) يأخذ to + المصدر (to enter)." },
-    { q: "13. Poor time management caused the team ........ the deadline.", options: ["miss", "missing", "missed", "to miss"], answer: 3, rule: "Cause + object + to-infinitive", zatona: "الفعل cause إذا تبعه مفعول (the team) يأخذ to + المصدر (to miss)." },
-    { q: "14. He suggested ........ to the park for a walk.", options: ["to go", "going", "go", "went"], answer: 1, rule: "Suggest + gerund", zatona: "الفعل suggest يُتْبَع بـ gerund (-ing) (going)." },
-    { q: "15. My teacher encouraged me ........ for the scholarship.", options: ["applying", "apply", "to apply", "applied"], answer: 2, rule: "Encourage + object + to-infinitive", zatona: "الفعل encourage إذا تبعه مفعول (me) يأخذ to + المصدر (to apply)." },
-    { q: "16. Do you mind ........ the window? It's getting cold here.", options: ["closing", "to close", "close", "closed"], answer: 0, rule: "Mind + gerund", zatona: "التعبير Do you mind يُتْبَع دائماً بـ gerund (-ing) (closing)." },
-    { q: "17. The heavy storm forced the pilots ........ the flight.", options: ["cancel", "to cancel", "canceling", "canceled"], answer: 1, rule: "Force + object + to-infinitive", zatona: "الفعل force إذا تبعه مفعول يأخذ to + المصدر (to cancel)." },
-    { q: "18. The doctor says that his new treatment involves ........ less sugar.", options: ["to eat", "eat", "eating", "ate"], answer: 2, rule: "Involve + gerund", zatona: "الفعل involve يُتْبَع بـ gerund (-ing) بمعنى ينطوي على (eating)." },
-    { q: "19. He expects ........ his driving test tomorrow.", options: ["to pass", "pass", "passing", "me pass"], answer: 0, rule: "Expect + to-infinitive", zatona: "الفعل expect يُتْبَع بـ to + المصدر (to pass)." },
-    { q: "20. The businessman risked ........ all his money in that unstable project.", options: ["to lose", "losing", "lose", "lost"], answer: 1, rule: "Risk + gerund", zatona: "الفعل risk يُتْبَع بـ gerund (-ing) بمعنى يخاطر بـ (losing)." },
-    { q: "21. I hope ........ you at the conference next month.", options: ["seeing", "see", "to be seeing", "to see"], answer: 3, rule: "Hope + to-infinitive", zatona: "الفعل hope يُتْبَع بـ to + المصدر (to see)." },
-    { q: "22. They discussed ........ a new city that would provide affordable housing for everyone.", options: ["build", "to build", "building", "being built"], answer: 2, rule: "Discuss + gerund", zatona: "الفعل discuss يُتْبَع بـ gerund (-ing) بمعنى يناقش (building)." },
-    { q: "23. My friend persuaded me ........ a new laptop.", options: ["to buy", "buying", "buy", "to be bought"], answer: 0, rule: "Persuade + object + to-infinitive", zatona: "الفعل persuade إذا تبعه مفعول يأخذ to + المصدر (to buy)." },
-    { q: "24. The employee denied ........ special treatment during the selection process.", options: ["to have given", "to be given", "given", "being given"], answer: 3, rule: "Deny + passive gerund", zatona: "الفعل deny يأخذ gerund، والمعنى هنا مبني للمجهول (أن يُعطى) فنختار (being given)." },
-    { q: "25. I have been promised ........ with my science project tomorrow.", options: ["to help", "helping", "to be helped", "to helping"], answer: 2, rule: "Promise + passive to-infinitive", zatona: "الجملة مبنية للمجهول (I have been promised)، وسأتلقى المساعدة (to be helped)." },
-    { q: "26. I strongly advise against ........ all your savings on a single product.", options: ["to spend", "spend", "to spending", "spending"], answer: 3, rule: "Preposition (against) + gerund", zatona: "حرف الجر against يُتْبَع بـ gerund (-ing) (spending)." },
-    { q: "27. Only one sentence in each group is grammatically correct:", options: ["She suggested to take a short break from the screen.", "She suggested taking a short break from the screen.", "She suggested take a short break from the screen.", "She suggested took a short break from the screen."], answer: 1, rule: "Suggest + gerund", zatona: "الفعل suggest يُتْبَع بـ gerund (-ing) لذا الخيار الصحيح (taking)." },
-    { q: "28. Only one sentence in each group is grammatically correct:", options: ["My parents encouraged me to apply for the scholarship.", "My parents encouraged me applying for the scholarship.", "My parents encouraged me apply for the scholarship.", "My parents encouraged to apply for the scholarship."], answer: 0, rule: "Encourage + object + to-inf", zatona: "الفعل encourage + مفعول + to + المصدر (me to apply)." },
-    { q: "29. Only one sentence in each group is grammatically correct:", options: ["We decided postponing the meeting until next Monday.", "We decided postpone the meeting until next Monday.", "We decided to postponing the meeting until next Monday.", "We decided to postpone the meeting until next Monday."], answer: 3, rule: "Decide + to-infinitive", zatona: "الفعل decide يُتْبَع بـ to + المصدر (to postpone)." },
-    { q: "30. Only one sentence in each group is grammatically correct:", options: ["My sister avoids eat fast food because she wants to stay healthy.", "My sister avoiding eating fast food because she wants to stay healthy.", "My sister avoids eating fast food because she wants to stay healthy.", "My sister avoids to eat fast food because she wants to stay healthy."], answer: 2, rule: "Avoid + gerund", zatona: "الفعل avoids يُتْبَع بـ gerund (-ing) (avoids eating)." },
-    { q: "31. On his way home, he stopped ........ some bread from the bakery.", options: ["to be bought", "buy", "buying", "to buy"], answer: 3, rule: "Stop to do (purpose)", zatona: "توقف (لكي) يشتري، أي توقف لغرض، نستخدم to + المصدر (to buy)." },
-    { q: "32. Honest citizens object to ........ unfairly by anyone.", options: ["treating", "being treated", "be treated", "treat"], answer: 1, rule: "Object to + passive gerund", zatona: "الاعتراض على (أن يُعاملوا)، مبني للمجهول بعد object to نستخدم (being treated)." },
-    { q: "33. We regret ........ you that the train to Aswan has been delayed.", options: ["informing", "inform", "to inform", "informed"], answer: 2, rule: "Regret to do (bad news)", zatona: "الأسف على إبلاغ خبر سيء (يحدث الآن) يأخذ to + المصدر (to inform)." },
-    { q: "34. The boy finally confessed to ........ his sister's chocolate.", options: ["eating", "eat", "be eaten", "be eating"], answer: 0, rule: "Confess to + gerund", zatona: "الفعل confess to (يعترف بـ) يُتْبَع بـ gerund (-ing) (eating)." },
-    { q: "35. I am sorry; I didn't mean ........ your feelings.", options: ["hurting", "to hurt", "hurt", "hurts"], answer: 1, rule: "Mean to (intend)", zatona: "الفعل mean بمعنى (يقصد أو ينوي) يُتْبَع بـ to + المصدر (to hurt)." },
-    { q: "36. Doctors dedicate their lives to ........ sick people.", options: ["be helped", "help", "helping", "being helped"], answer: 2, rule: "Dedicate to + gerund", zatona: "التعبير dedicate to يُتْبَع بـ gerund (-ing) (helping)." },
-    { q: "37. Mona is always busy ........ for her final exams these days.", options: ["prepare", "preparing", "to prepare", "prepared"], answer: 1, rule: "Busy + gerund", zatona: "الصفة busy تُتْبَع مباشرة بـ gerund (preparing)." },
-    { q: "38. Smoking heavily always leads to ........ heart diseases.", options: ["cause", "causes", "being caused", "causing"], answer: 3, rule: "Lead to + gerund", zatona: "الفعل lead to (يؤدي إلى) يُتْبَع بـ gerund (-ing) (causing)." },
-    { q: "39. It's no use ........ about the weather; we cannot change it.", options: ["complaining", "complain", "to complain", "to be complained"], answer: 0, rule: "It's no use + gerund", zatona: "التعبير (It's no use) بمعنى لا فائدة من، يُتْبَع بـ gerund (complaining)." },
-    { q: "40. Don't forget ........ the lights before you go to bed tonight.", options: ["turning off", "turn off", "turned off", "to turn off"], answer: 3, rule: "Forget to do (future duty)", zatona: "تذكر أن تفعل شيء في المستقبل (واجب)، يأخذ to + المصدر (to turn off)." },
-    { q: "41. Alexandria is a beautiful city; it is really worth ........ in summer.", options: ["to be visited", "visit", "visiting", "to visit"], answer: 2, rule: "Worth + gerund", zatona: "الصفة worth تُتْبَع دائماً بـ gerund (-ing) (visiting)." },
-    { q: "42. My father doesn't mind ........ me to school when he is free.", options: ["drive", "driving", "to drive", "my driving"], answer: 1, rule: "Mind + gerund", zatona: "الفعل mind يُتْبَع بـ gerund (-ing) (driving)." },
-    { q: "43. The climber tried hard ........ the top of the mountain, but it was too high.", options: ["to be reached", "to reach", "reaching", "reach"], answer: 1, rule: "Try to do (effort/difficult)", zatona: "محاولة فعل شيء صعب ويتطلب مجهوداً تأخذ to + المصدر (to reach)." },
-    { q: "44. The match is very close to ........ ; there are only two minutes left.", options: ["finishing", "finish", "be finished", "being finished"], answer: 0, rule: "Close to + gerund", zatona: "التعبير close to يُتْبَع بـ gerund (-ing) (finishing)." },
-    { q: "45. In addition to ........ French, she also studies German.", options: ["learning", "learn", "learned", "be learned"], answer: 0, rule: "In addition to + gerund", zatona: "رابط الإضافة (In addition to) يُتْبَع بـ gerund (-ing) (learning)." },
-    { q: "46. I regret ........ my time on video games when I was young.", options: ["to waste", "waste", "wasting", "to be wasted"], answer: 2, rule: "Regret doing (past action)", zatona: "الندم على شيء حدث في الماضي (when I was young) يأخذ gerund (wasting)." },
-    { q: "47. If you have a headache, try ........ an aspirin; it might help.", options: ["to take", "take", "being taken", "taking"], answer: 3, rule: "Try doing (experiment/advice)", zatona: "تجربة شيء جديد كنصيحة للشفاء تأخذ gerund (-ing) (taking)." },
-    { q: "48. After finishing the lesson, the teacher went on ........ the homework.", options: ["to explain", "explaining", "explain", "being explained"], answer: 0, rule: "Go on to do (change activity)", zatona: "الانتقال من نشاط إلى نشاط آخر مختلف يأخذ to + المصدر (to explain)." },
-    { q: "49. The old man went on ........ about the good old days for an hour.", options: ["talk", "talking", "to talk", "being talked"], answer: 1, rule: "Go on doing (continue)", zatona: "الاستمرار في نفس النشاط (الحديث) يأخذ gerund (-ing) (talking)." },
-    { q: "50. Your shoes are very dirty; they need ........ right now.", options: ["to be cleaning", "clean", "to clean", "cleaning"], answer: 3, rule: "Need + gerund (passive meaning)", zatona: "الفعل need لغير العاقل يعطي معنى المجهول ويُتْبَع بـ gerund (cleaning)." },
-    { q: "51. My brother can't help ........ whenever he watches emotional films.", options: ["cry", "cried", "to cry", "crying"], answer: 3, rule: "Can't help + gerund", zatona: "التعبير can't help (لا يتمالك نفسه) يُتْبَع بـ gerund (-ing) (crying)." },
-    { q: "52. The ancient manuscript had difficulty ........ because some pages were missing.", options: ["being translated", "translate", "to translate", "translating"], answer: 0, rule: "Have difficulty + passive gerund", zatona: "المعنى مجهول (صعوبة في أن تُتَرجَم)، فنستخدم (being translated)." },
-    { q: "53. There was no point in ........ after the deadline had passed.", options: ["to submit", "submit", "submitting", "being submitted"], answer: 2, rule: "No point in + gerund", zatona: "التعبير no point in يُتْبَع بـ gerund (-ing) (submitting)." },
-    { q: "54. Only one sentence in each group is grammatically correct:", options: ["I look forward to meet my cousins during the summer holiday.", "I look forward meeting my cousins during the summer holiday.", "I look forward to be meeting my cousins during the summer holiday.", "I look forward to meeting my cousins during the summer holiday."], answer: 3, rule: "Look forward to + gerund", zatona: "التعبير (look forward to) يُتْبَع بـ gerund (to meeting)." },
-    { q: "55. Only one sentence in each group is grammatically correct:", options: ["We stopped to have lunch before continuing our journey to Luxor.", "We stopped having lunch before continuing our journey to Luxor.", "We stopped have lunch before continuing our journey to Luxor.", "We stopped to having lunch before continuing our journey to Luxor."], answer: 0, rule: "Stop to do (purpose)", zatona: "التوقف (لكي) نتناول الغداء كغرض، يأخذ to + المصدر (to have)." },
-    { q: "56. Only one sentence in each group is grammatically correct:", options: ["The old bridge needs repaired before the heavy winter rains begin.", "The old bridge needs repairing before the heavy winter rains begin.", "The old bridge needs to repair before the heavy winter rains begin.", "The old bridge needs to repairing before the heavy winter rains begin."], answer: 1, rule: "Need + gerund (passive meaning)", zatona: "لغير العاقل، need + gerund تفيد المبني للمجهول (needs repairing)." },
-    { q: "57. Only one sentence in each group is grammatically correct:", options: ["I'll never forget meet my favorite writer at the Book Fair.", "I'll never forget met my favorite writer at the Book Fair.", "I'll never forget to meet my favorite writer at the Book Fair.", "I'll never forget meeting my favorite writer at the Book Fair."], answer: 3, rule: "Forget doing (past memory)", zatona: "عدم نسيان ذكرى حدثت في الماضي يأخذ gerund (meeting)." }
+    { q: "1. ........ ill, my father could not attend his old friend's funeral.", options: ["For being", "To be", "Being", "To have been"], answer: 2, rule: "Participle Clause (Reason)", zatona: "تُستخدم (Being) كبديل لـ (Because he was) للتعبير عن السبب في بداية الجملة." },
+    { q: "2. ........ that I would be late for school, I took a taxi instead of a bus.", options: ["To be thinking", "To think", "Thought", "Thinking"], answer: 3, rule: "Participle Clause (Reason)", zatona: "استخدام الفعل مضافاً له ing (Thinking) في بداية الجملة يحل محل (Because I thought)." },
+    { q: "3. Neil Armstrong was the first man ........ on the surface of the moon.", options: ["to walk", "walks", "walking", "walked"], answer: 0, rule: "Ordinal Numbers + Infinitive", zatona: "بعد الأعداد الترتيبية (the first, the second..) نستخدم (to + المصدر)." },
+    { q: "4. The teacher advised ........ a study plan before the final exams started.", options: ["to make", "making", "we make", "to making"], answer: 1, rule: "Advise + Gerund (No Object)", zatona: "الفعل advise إذا لم يأتِ بعده مفعول مباشر، يتبعه (gerund / v+ing)." },
+    { q: "5. ........ to disturb his sleeping baby, Ahmed closed the door very quietly.", options: ["No wanting", "Wanting", "Not wanting", "Without wanting"], answer: 2, rule: "Negative Participle Clause", zatona: "لنفي عبارة الـ Participle نضع (Not) قبل الـ v+ing (Not wanting)." },
+    { q: "6. If you have any medical problems, Dr. Ali is the best person ........ .", options: ["to consult", "consulting", "you consult", "should consult"], answer: 0, rule: "The best + noun + to-infinitive", zatona: "التركيبة (the best person) تتبع بـ (to + المصدر) لبيان الغرض." },
+    { q: "7. Since ........ the car accident last year, she has been driving very cautiously.", options: ["see", "saw", "seen", "seeing"], answer: 3, rule: "Since + Gerund", zatona: "كلمة Since إذا لم يأتِ بعدها فاعل، يمكن أن يتبعها (v+ing) مباشرة." },
+    { q: "8. You had better ........ a coat; it is very cold outside.", options: ["wearing", "to wear", "wear", "to wearing"], answer: 2, rule: "Had better + bare infinitive", zatona: "التعبير (had better) يُتبع دائماً بالمصدر بدون to (wear)." },
+    { q: "9. The funny movie made everyone ........ loudly.", options: ["laugh", "laughing", "to laugh", "to be laughed"], answer: 0, rule: "Make + object + bare infinitive", zatona: "الفعل make بمعنى يَجعَل، إذا بُني للمعلوم يتبعه مفعول ثم مصدر بدون to (laugh)." },
+    { q: "10. The doctor recommended that the patient ........ some rest.", options: ["to take", "taking", "takes", "take"], answer: 3, rule: "Subjunctive after Recommend", zatona: "بعد (recommend that + فاعل) نستخدم الفعل في المصدر (take) حتى لو كان الفاعل مفرداً." },
+    { q: "11. I stayed at the stadium and watched the team ........ the match.", options: ["winning", "win", "to win", "to winning"], answer: 1, rule: "Watch + object + bare infinitive", zatona: "الفعل watch لمشاهدة الحدث بالكامل يأخذ (مصدر بدون to)، ولجزء من الحدث يأخذ (v+ing). الخيار الأدق هنا win." },
+    { q: "12. I insist on ........ this small present as a token of my appreciation.", options: ["your accepting", "you to accept", "yours accepting", "you accept"], answer: 0, rule: "Preposition + Possessive + Gerund", zatona: "بعد حرف الجر on يأتي gerund، ويمكن سبقه بصفة ملكية (your accepting)." },
+    { q: "13. You had better ........ the battery, or else you risk losing all your unsaved data.", options: ["not change", "change", "changing", "to change"], answer: 1, rule: "Had better + bare infinitive", zatona: "نصيحة إيجابية لتجنب الخطر، نستخدم (had better) متبوعة بالمصدر (change)." },
+    { q: "14. The minister talked about the new economic policy, and then he went on ........ about foreign trade agreements.", options: ["to talk", "talking", "talk", "having talked"], answer: 0, rule: "Go on + to-infinitive (New topic)", zatona: "انتقل من الحديث عن موضوع إلى موضوع آخر جديد، فنستخدم (to talk)." },
+    { q: "15. ........ the main road blocked by the police, the driver turned into a side street.", options: ["To see", "Seen", "See", "Seeing"], answer: 3, rule: "Participle Clause (Reason/Time)", zatona: "للتعبير عن (عندما رأى) في بداية الجملة نستخدم (Seeing)." },
+    { q: "16. While ........ the match, the electricity suddenly went out.", options: ["he watching", "was watching", "watching", "watched"], answer: 2, rule: "While + Gerund (No Subject)", zatona: "بعد While إذا حُذف الفاعل، نستخدم الـ (v+ing) مباشرة (watching)." },
+    { q: "17. He entered the laboratory, ........ to find the results ready.", options: ["expects", "to expect", "expected", "expecting"], answer: 3, rule: "Participle Clause (Simultaneous action)", zatona: "دخل المختبر (وهو يتوقع)، نستخدم (expecting) لوصف حالة الفاعل أثناء الفعل الأساسي." },
+    { q: "18. After ........ his project, Omar submitted it online.", options: ["complete", "completing", "completed", "to complete"], answer: 1, rule: "After + Gerund", zatona: "بعد After إذا لم يوجد فاعل، نستخدم الـ (v+ing) مباشرة (completing)." },
+    { q: "19. We saved money ........ buy a new computer.", options: ["to", "so that", "for", "because"], answer: 0, rule: "To + Infinitive (Purpose)", zatona: "للتعبير عن الغرض (لكي نشتري) نستخدم (to) متبوعة بالمصدر." },
+    { q: "20. She practices speaking English every day ........ she can improve her pronunciation.", options: ["because", "although", "so that", "unless"], answer: 2, rule: "So that (Purpose)", zatona: "التعبير (so that) بمعنى 'لكي' يُتبع بجملة كاملة تحتوي على (can / could)." },
+    { q: "21. The box is too heavy ........ .", options: ["carrying", "to carry", "carried", "carry"], answer: 1, rule: "Too + adjective + to-infinitive", zatona: "قاعدة (too ... to) تعني 'جداً لدرجة ألا'، وتأخذ (to + المصدر)." },
+    { q: "22. The child is clever enough ........ the puzzle alone.", options: ["solve", "solving", "solved", "to solve"], answer: 3, rule: "Adjective + enough + to-infinitive", zatona: "بعد (enough) نستخدم (to + المصدر) للتعبير عن القدرة الكافية." },
+    { q: "23. Only one sentence in each group is grammatically correct:", options: ["She objected to be treated unfairly by her manager.", "She objected to treating unfairly by her manager.", "She objected to being treated unfairly by her manager.", "She objected being treated unfairly by her manager."], answer: 2, rule: "Object to + Passive Gerund", zatona: "التعبير object to يأتي بعده gerund، والمعنى مبني للمجهول (تُعامَل) فنختار (being treated)." },
+    { q: "24. Only one sentence in each group is grammatically correct:", options: ["He admitted to making a serious mistake during the interview.", "He admitted to make a serious mistake during the interview.", "He admitted making to a serious mistake during the interview.", "He admitted to be making a serious mistake during the interview."], answer: 0, rule: "Admit to + Gerund", zatona: "الفعل admit يمكن أن يأخذ (to) كحرف جر يتبعه gerund (to making)." },
+    { q: "25. Only one sentence in each group is grammatically correct:", options: ["After finishing his homework, Ahmed went on to play video games.", "My car is very dirty. It needs to polish immediately.", "I heard my sister to sing a beautiful song.", "Getting a good job means to attend many interviews."], answer: 0, rule: "Go on to do (New activity)", zatona: "انتهى من الواجب، ثم انتقل لنشاط جديد (لعب الفيديو) فنستخدم (went on to play)." },
+    { q: "26. Only one sentence in each group is grammatically correct:", options: ["After they completing the project, the students went home.", "After complete the project, the students went home.", "After to completing the project, the students went home.", "After completing the project, the students went home."], answer: 3, rule: "After + Gerund (No Subject)", zatona: "الجملة السليمة هي التي تأتي فيها (v+ing) مباشرة بعد After بدون فاعل (After completing)." },
+    { q: "27. She is busy ........ the annual financial report this week.", options: ["prepare", "preparing", "prepared", "to prepare"], answer: 1, rule: "Busy + Gerund", zatona: "الصفة busy تُتْبَع مباشرة بـ gerund (preparing) بدون حرف جر." },
+    { q: "28. Before ........ any decision, you should consider all possibilities.", options: ["make", "made", "making", "to make"], answer: 2, rule: "Before + Gerund", zatona: "كلمة Before بدون فاعل تُتْبَع بـ (v+ing) مباشرة (making)." },
+    { q: "29. It's no use ........ with someone who refuses to listen.", options: ["argue", "argued", "to argue", "arguing"], answer: 3, rule: "It's no use + Gerund", zatona: "التعبير (It's no use) بمعنى 'لا فائدة من' يُتْبَع بـ gerund (arguing)." },
+    { q: "30. The report is too difficult ........ in one sitting.", options: ["understanding", "understand", "to understand", "understood"], answer: 2, rule: "Too + adj + to-infinitive", zatona: "قاعدة (too ... to) تأخذ (to + المصدر) (to understand)." },
+    { q: "31. You had better ........ your homework before going out.", options: ["to finish", "finish", "finishing", "finished"], answer: 1, rule: "Had better + bare infinitive", zatona: "التعبير (had better) يُتْبَع بالمصدر بدون to (finish)." },
+    { q: "32. The teacher encouraged us ........ more scientific articles regularly.", options: ["reading", "read", "reads", "to read"], answer: 3, rule: "Encourage + object + to-infinitive", zatona: "الفعل encourage + مفعول (us) يُتْبَع بـ (to + المصدر)." },
+    { q: "33. ........ every day helps students improve their language skills.", options: ["Reading", "Read", "To reading", "Reads"], answer: 0, rule: "Gerund as Subject", zatona: "نبدأ الجملة بالاسم الفاعل (Gerund) ليعمل كفاعل للجملة (Reading)." },
+    { q: "34. I clearly remember ........ him at the conference two years ago.", options: ["to meet", "meet", "meeting", "met"], answer: 2, rule: "Remember doing (Past memory)", zatona: "تذكر لشيء حدث في الماضي يأخذ gerund (meeting)." },
+    { q: "35. We regret ........ you that the flight has been delayed.", options: ["informing", "to inform", "inform", "informed"], answer: 1, rule: "Regret to do (Bad news)", zatona: "الأسف على إبلاغ خبر سيء (يحدث الآن) يأخذ to + المصدر (to inform)." },
+    { q: "36. The students were happy ........ excellent results in the final exam.", options: ["achieve", "achieving", "to achieve", "achieved"], answer: 2, rule: "Adjective + to-infinitive", zatona: "الصفات التي تعبر عن المشاعر (happy) تُتْبَع بـ (to + المصدر)." },
+    { q: "37. Since ........ abroad, he has become more independent.", options: ["traveling", "travel", "traveled", "to travel"], answer: 0, rule: "Since + Gerund", zatona: "كلمة Since بدون فاعل تُتْبَع بـ (v+ing) (traveling)." },
+    { q: "38. The manager made the employees ........ the safety instructions carefully.", options: ["read", "reading", "to read", "reads"], answer: 0, rule: "Make + object + bare infinitive", zatona: "الفعل make في المبني للمعلوم يأخذ مفعول ثم مصدر بدون to (read)." }
 ];
 
 let typeInterval = null;
@@ -654,7 +663,7 @@ function setTimeAttack(level, el) {
 
 let quizData = [];
 let currentQuestion = 0, userAnswers = {}, studentName = "", selectedAvatar = '💎';
-let totalSeconds = 57 * 240, qTimeLeft = 15, timerInterval = null;
+let totalSeconds = 38 * 240, qTimeLeft = 15, timerInterval = null;
 let isSubmitting = false; 
 let pauseCount = 0, isPaused = false; 
 let cheatWarningsCount = 0;
@@ -978,10 +987,11 @@ function calculateScore() {
             const correctOpt = item.options[item.answer];
 
             if (!isCorrect) {
-                let emailExplanation = (item.exp || "").replace(/class='exp-en'/g, "style='direction: ltr; text-align: left; color: #A1A1AA; font-size: 14px; margin-bottom: 8px;'").replace(/class='exp-separator'/g, "style='width: 100%; height: 1px; border-bottom: 1px dashed rgba(139, 92, 246, 0.25); margin: 8px 0;'").replace(/class='exp-ar'/g, "style='direction: rtl; text-align: right; color: #FFF; font-family: Tahoma, Arial, sans-serif; font-size: 14px; font-weight: bold; margin-top: 8px;'");
-                wrongAnswersHTML += `<div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid rgba(139, 92, 246, 0.1);"><div style="direction: ltr; text-align: left; font-weight: bold; color: #8B5CF6; margin-bottom: 8px; font-size: 16px;">Q: ${item.originalQ}</div><div style="direction: ltr; text-align: left; color: #F43F5E; font-size: 15px; margin-bottom: 4px;">❌ <b>Student's Answer:</b> ${emailUserOptText}</div><div style="direction: ltr; text-align: left; color: #10B981; font-size: 15px; margin-bottom: 10px;">✅ <b>Correct Answer:</b> ${correctOpt}</div><div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 6px; border-left: 4px solid #8B5CF6;">${emailExplanation}</div><div style="margin-top: 8px; color: #A1A1AA; font-size: 13px; direction: rtl;">📌 القاعدة المفقودة: ${item.rule}</div></div>`;
+                let emailExplanation = (item.exp || "").replace(/class='exp-en'/g, "style='direction: ltr; text-align: left; color: #555; font-size: 14px; margin-bottom: 8px;'").replace(/class='exp-separator'/g, "style='width: 100%; height: 1px; border-bottom: 1px dashed #ccc; margin: 8px 0;'").replace(/class='exp-ar'/g, "style='direction: rtl; text-align: right; color: #000080; font-family: Tahoma, Arial, sans-serif; font-size: 14px; font-weight: bold; margin-top: 8px;'");
+                wrongAnswersHTML += `<div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid #e2e8f0;"><div style="direction: ltr; text-align: left; font-weight: bold; color: #000080; margin-bottom: 8px; font-size: 16px;">Q: ${item.originalQ}</div><div style="direction: ltr; text-align: left; color: #E11D48; font-size: 15px; margin-bottom: 4px;">❌ <b>Student's Answer:</b> ${emailUserOptText}</div><div style="direction: ltr; text-align: left; color: #059669; font-size: 15px; margin-bottom: 10px;">✅ <b>Correct Answer:</b> ${correctOpt}</div><div style="background: rgba(0,0,0,0.04); padding: 12px; border-radius: 6px; border-left: 4px solid #E11D48;">${emailExplanation}</div><div style="margin-top: 8px; color: #666; font-size: 13px; direction: rtl;">📌 القاعدة المفقودة: ${item.rule}</div></div>`;
             }
 
+            /* Print Master Engine Data Injection */
             let printOptionsHTML = '<div class="print-options-grid">';
             item.options.forEach((opt, idx) => {
                 let isCorrectOptClass = (idx === item.answer) ? 'is-correct-opt' : '';
@@ -1057,16 +1067,16 @@ function calculateScore() {
         try { soundBossWin(); } catch(e){}
         try { initScratchCard(); } catch(e){}
         try { 
-            let confColor = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#8B5CF6'; 
+            let confColor = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#E11D48'; 
             if (percent >= 80 && typeof confetti === 'function') {
-                confetti({ particleCount: 300, spread: 150, origin: { y: 0.6 }, colors: ['#0A0A0A', confColor, '#F8FAFC'] }); 
+                confetti({ particleCount: 300, spread: 150, origin: { y: 0.6 }, colors: ['#0A0A0A', confColor, '#FAFAFA'] }); 
             }
         } catch(e){}
 
         try {
             let usedTime = isTimeAttack ? "Time Attack" : ( (quizData.length * 240) - totalSeconds) + "s";
             let payload = new URLSearchParams({ 
-                examName: "ELITE CHALLENGE - CODE: GER-INF-57", 
+                examName: "ELITE CHALLENGE - CODE: GER-INF-38", 
                 studentName: studentName, 
                 score: `${score} / ${quizData.length}`, 
                 percentage: percent, 
@@ -1102,7 +1112,7 @@ function downloadCertificate() {
     canvas.width = 1000; 
     canvas.height = 700; 
     const ctx = canvas.getContext('2d');
-    let accent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#8B5CF6';
+    let accent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#E11D48';
     
     ctx.fillStyle = '#0A0A0A'; 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -1116,7 +1126,7 @@ function downloadCertificate() {
     ctx.textAlign = "center"; 
     ctx.textBaseline = "middle"; 
     ctx.fillText("MR. AYMAN KAMEL", 0, -60); 
-    ctx.fillText("AMETHYST ELITE", 0, 70); 
+    ctx.fillText("OBSIDIAN ELITE", 0, 70); 
     ctx.restore();
     
     ctx.strokeStyle = accent; 
@@ -1132,15 +1142,15 @@ function downloadCertificate() {
     ctx.font = "bold 45px 'Outfit'"; 
     ctx.fillText("✨ Certificate of Ultimate Mastery ✨", canvas.width / 2, 120);
     
-    ctx.fillStyle = "#A1A1AA"; 
+    ctx.fillStyle = "#A3A3A3"; 
     ctx.font = "30px 'Outfit'"; 
     ctx.fillText("This prestigious document is awarded to the elite student:", canvas.width / 2, 220);
     
-    ctx.fillStyle = "#F8FAFC"; 
+    ctx.fillStyle = "#FAFAFA"; 
     ctx.font = "bold 65px 'Cairo'"; 
     ctx.fillText(studentName, canvas.width / 2, 320);
     
-    ctx.fillStyle = "#A1A1AA"; 
+    ctx.fillStyle = "#A3A3A3"; 
     ctx.font = "25px 'Outfit'"; 
     ctx.fillText(`For successfully decoding the "Elite Challenge" with an accuracy of`, canvas.width / 2, 420);
     
@@ -1159,11 +1169,11 @@ function downloadCertificate() {
     ctx.globalAlpha = 0.6; 
     ctx.textAlign = "left"; 
     ctx.font = "16px 'Outfit'"; 
-    ctx.fillText("ID: AME-" + d.getFullYear() + "-" + Math.floor(Math.random()*90000+10000), 55, 655); 
+    ctx.fillText("ID: OBS-" + d.getFullYear() + "-" + Math.floor(Math.random()*90000+10000), 55, 655); 
     ctx.globalAlpha = 1.0;
     
     const link = document.createElement('a'); 
-    link.download = `Amethyst_Mastery_${studentName}.png`; 
+    link.download = `Obsidian_Mastery_${studentName}.png`; 
     link.href = canvas.toDataURL('image/png'); 
     link.click();
 }
